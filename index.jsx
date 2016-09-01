@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import classNames from 'classnames';
 
 
 class Alert extends Component {
@@ -9,6 +10,7 @@ class Alert extends Component {
     dismissible: PropTypes.bool,
     display: PropTypes.bool,
     animation: PropTypes.string,
+    children: PropTypes.node,
   };
 
   static defaultProps = {
@@ -26,31 +28,37 @@ class Alert extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.display !== this.props.display)
-      this.setState({show: nextProps.display});
+    if (nextProps.display !== this.props.display) {
+      this.setState({ show: nextProps.display });
+    }
   }
 
   render() {
-    const { type, dismissible, display, animation, children, ...alertOpts } = this.props;
+    const { type, dismissible, animation, children, ...alertOpts } = this.props;
     const { show } = this.state;
 
     return (
       <ReactCSSTransitionGroup
         transitionName={animation}
         transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}>
+        transitionLeaveTimeout={300}
+      >
 
         { show ?
 
-          <div className={`alert alert-${type}${ dismissible ? ' alert-dismissible' : '' }`} {...alertOpts}>
+          <div
+            className={classNames('alert', `alert-${type}`, { 'alert-dismissible': dismissible })}
+            {...alertOpts}
+          >
 
             { dismissible ?
               <button
                 type='button'
                 className='close'
-                onClick={(e) => this.setState({show: false})}
+                onClick={() => this.setState({ show: false })}
                 data-dismiss='alert'
-                aria-label='Close'>
+                aria-label='Close'
+              >
                 <span aria-hidden='true'>&times;</span>
               </button>
             : null }
@@ -62,7 +70,7 @@ class Alert extends Component {
         : null }
 
       </ReactCSSTransitionGroup>
-    )
+    );
   }
 }
 
