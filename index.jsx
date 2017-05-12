@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 
+import './styles.scss';
+
 
 class Alert extends Component {
 
@@ -48,6 +50,7 @@ class Alert extends Component {
 
           <div
             className={classNames('alert', `alert-${type}`, { 'alert-dismissible': dismissible })}
+            styleName='alert'
             {...alertOpts}
           >
 
@@ -55,6 +58,7 @@ class Alert extends Component {
               <button
                 type='button'
                 className='close'
+                styleName='close'
                 onClick={() => this.setState({ show: false })}
                 data-dismiss='alert'
                 aria-label='Close'
