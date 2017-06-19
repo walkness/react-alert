@@ -1,3 +1,5 @@
+@import '~styles/variables';
+
 .alert {
   $transition: all 300ms ease;
   overflow: hidden;
@@ -19,16 +21,16 @@
     &:global(.slide-down-enter-active) {
       transition: $transition;
       max-height: 100px;
-      padding-top: $alert-padding;
-      padding-bottom: $alert-padding;
+      padding-top: $alert-padding-y;
+      padding-bottom: $alert-padding-y;
       border-width: 1px;
     }
   }
 
   &:global(.slide-down-leave) {
     max-height: 100px;
-    padding-top: $alert-padding;
-    padding-bottom: $alert-padding;
+    padding-top: $alert-padding-y;
+    padding-bottom: $alert-padding-y;
     border-width: 1px;
 
     &:global(.slide-down-leave-active) {
@@ -39,4 +41,8 @@
       transition: $transition;
     }
   }
+}
+
+.close {
+
 }
