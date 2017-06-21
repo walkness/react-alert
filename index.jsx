@@ -6,18 +6,19 @@ import classNames from 'classnames';
 class Alert extends Component {
 
   static propTypes = {
-    type: PropTypes.oneOf(['info', 'success', 'warning', 'danger']),
-    dismissible: PropTypes.bool,
-    display: PropTypes.bool,
     animation: PropTypes.string,
     children: PropTypes.node,
+    dismissible: PropTypes.bool,
+    display: PropTypes.bool,
+    type: PropTypes.oneOf(['info', 'success', 'warning', 'danger']),
   };
 
   static defaultProps = {
-    type: 'info',
+    animation: 'slide-down',
+    children: null,
     dismissible: false,
     display: true,
-    animation: 'slide-down',
+    type: 'info',
   };
 
   constructor(props, context) {
