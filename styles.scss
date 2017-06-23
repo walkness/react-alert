@@ -1,0 +1,48 @@
+@import '~styles/variables';
+
+
+.alert {
+  $transition: all 300ms ease;
+
+  > *:first-child {
+    margin-top: 0;
+  }
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+
+  &:global(.slide-down-enter) {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    border-width: 0;
+    opacity: 0;
+
+    &:global(.slide-down-enter-active) {
+      transition: $transition;
+      max-height: 100px;
+      padding-top: $alert-padding-y;
+      padding-bottom: $alert-padding-y;
+      border-width: 1px;
+      opacity: 1;
+    }
+  }
+
+  &:global(.slide-down-leave) {
+    max-height: 100px;
+    padding-top: $alert-padding-y;
+    padding-bottom: $alert-padding-y;
+    border-width: 1px;
+    opacity: 1;
+
+    &:global(.slide-down-leave-active) {
+      max-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      border-width: 0;
+      transition: $transition;
+      opacity: 0;
+    }
+  }
+}

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 
+import './styles.scss';
+
 
 class Alert extends Component {
 
@@ -50,6 +52,7 @@ class Alert extends Component {
 
           <div
             className={classNames('alert', `alert-${type}`, { 'alert-dismissible': dismissible })}
+            styleName='alert'
             {...alertOpts}
           >
 
