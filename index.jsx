@@ -44,8 +44,8 @@ class Alert extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionName={animation}
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}
+        transitionEnterTimeout={200}
+        transitionLeaveTimeout={200}
       >
 
         { show ?
@@ -60,6 +60,7 @@ class Alert extends Component {
               <button
                 type='button'
                 className='close'
+                styleName='close'
                 onClick={() => this.setState({ show: false })}
                 data-dismiss='alert'
                 aria-label='Close'
