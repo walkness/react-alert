@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import classNames from 'classnames';
 
@@ -8,18 +9,19 @@ import './styles.scss';
 class Alert extends Component {
 
   static propTypes = {
-    type: PropTypes.oneOf(['info', 'success', 'warning', 'danger']),
-    dismissible: PropTypes.bool,
-    display: PropTypes.bool,
     animation: PropTypes.string,
     children: PropTypes.node,
+    dismissible: PropTypes.bool,
+    display: PropTypes.bool,
+    type: PropTypes.oneOf(['info', 'success', 'warning', 'danger']),
   };
 
   static defaultProps = {
-    type: 'info',
+    animation: 'slide-down',
+    children: null,
     dismissible: false,
     display: true,
-    animation: 'slide-down',
+    type: 'info',
   };
 
   constructor(props, context) {
@@ -42,8 +44,8 @@ class Alert extends Component {
     return (
       <ReactCSSTransitionGroup
         transitionName={animation}
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={300}
+        transitionEnterTimeout={200}
+        transitionLeaveTimeout={200}
       >
 
         { show ?
