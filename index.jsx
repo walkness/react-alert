@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import classNames from 'classnames';
 
 import './styles.scss';
@@ -38,11 +38,11 @@ class Alert extends Component {
   }
 
   render() {
-    const { type, dismissible, animation, children, ...alertOpts } = this.props;
+    const { type, dismissible, animation, children, display, ...alertOpts } = this.props;
     const { show } = this.state;
 
     return (
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName={animation}
         transitionEnterTimeout={200}
         transitionLeaveTimeout={200}
@@ -75,7 +75,7 @@ class Alert extends Component {
 
         : null }
 
-      </ReactCSSTransitionGroup>
+      </CSSTransitionGroup>
     );
   }
 }
