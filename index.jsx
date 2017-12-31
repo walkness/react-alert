@@ -11,6 +11,7 @@ class Alert extends Component {
   static propTypes = {
     animation: PropTypes.string,
     children: PropTypes.node,
+    dangerouslySetInnerHTML: PropTypes.shape({ __html: PropTypes.string }),
     dismissible: PropTypes.bool,
     display: PropTypes.bool,
     type: PropTypes.oneOf(['info', 'success', 'warning', 'danger']),
@@ -19,6 +20,7 @@ class Alert extends Component {
   static defaultProps = {
     animation: 'slide-down',
     children: null,
+    dangerouslySetInnerHTML: undefined,
     dismissible: false,
     display: true,
     type: 'info',
@@ -38,7 +40,10 @@ class Alert extends Component {
   }
 
   render() {
-    const { type, dismissible, animation, children, display, ...alertOpts } = this.props;
+    const {
+      type, dismissible, animation, children, display,
+      dangerouslySetInnerHTML, ...alertOpts
+    } = this.props;
     const { show } = this.state;
 
     return (
@@ -69,7 +74,11 @@ class Alert extends Component {
               </button>
             : null }
 
-            { children }
+            { dangerouslySetInnerHTML ?
+              <div
+                dangerouslySetInnerHTML={dangerouslySetInnerHTML} // eslint-disable-line react/no-danger, max-len
+              />
+            : children }
 
           </div>
 
