@@ -11,6 +11,7 @@ class Alert extends Component {
   static propTypes = {
     animation: PropTypes.string,
     children: PropTypes.node,
+    className: PropTypes.string,
     dangerouslySetInnerHTML: PropTypes.shape({ __html: PropTypes.string }),
     dismissible: PropTypes.bool,
     display: PropTypes.bool,
@@ -19,6 +20,7 @@ class Alert extends Component {
 
   static defaultProps = {
     animation: 'slide-down',
+    className: null,
     children: null,
     dangerouslySetInnerHTML: undefined,
     dismissible: false,
@@ -41,7 +43,7 @@ class Alert extends Component {
 
   render() {
     const {
-      type, dismissible, animation, children, display,
+      type, dismissible, animation, className, children, display,
       dangerouslySetInnerHTML, ...alertOpts
     } = this.props;
     const { show } = this.state;
@@ -56,7 +58,13 @@ class Alert extends Component {
         { show ?
 
           <div
-            className={classNames('alert', `alert-${type}`, { 'alert-dismissible': dismissible })}
+            className={classNames(
+              'alert',
+              `alert-${type}`, {
+                'alert-dismissible': dismissible,
+              },
+              className,
+            )}
             styleName='alert'
             {...alertOpts}
           >
