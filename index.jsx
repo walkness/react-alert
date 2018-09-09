@@ -7,7 +7,6 @@ import './styles.scss';
 
 
 class Alert extends Component {
-
   static propTypes = {
     animation: PropTypes.string,
     children: PropTypes.node,
@@ -15,16 +14,18 @@ class Alert extends Component {
     dangerouslySetInnerHTML: PropTypes.shape({ __html: PropTypes.string }),
     dismissible: PropTypes.bool,
     display: PropTypes.bool,
+    onDismiss: PropTypes.func,
     type: PropTypes.oneOf(['info', 'success', 'warning', 'danger']),
   };
 
   static defaultProps = {
     animation: 'slide-down',
-    className: null,
     children: null,
+    className: null,
     dangerouslySetInnerHTML: undefined,
     dismissible: false,
     display: true,
+    onDismiss: undefined,
     type: 'info',
   };
 
@@ -33,6 +34,7 @@ class Alert extends Component {
     this.state = {
       show: props.display,
     };
+    this.handleDismiss = this.handleDismiss.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -41,12 +43,20 @@ class Alert extends Component {
     }
   }
 
+  handleDismiss() {
+    const { onDismiss } = this.props;
+    if (onDismiss) onDismiss();
+    this.setState({ show: false });
+  }
+
   render() {
     const {
       type, dismissible, animation, className, children, display,
-      dangerouslySetInnerHTML, ...alertOpts
+      dangerouslySetInnerHTML, onDismiss, ...alertOpts
     } = this.props;
-    const { show } = this.state;
+    const { show: stateShow } = this.state;
+
+    const show = onDismiss ? display : stateShow;
 
     return (
       <CSSTransitionGroup
@@ -74,7 +84,7 @@ class Alert extends Component {
                 type='button'
                 className='close'
                 styleName='close'
-                onClick={() => this.setState({ show: false })}
+                onClick={this.handleDismiss}
                 data-dismiss='alert'
                 aria-label='Close'
               >
